@@ -1,8 +1,8 @@
-# cpp_novice_template
+# ppp3_novice_template
 
 [中文 (额外地, 有全网最全的 VSCode 配置教程)](请读我.md)
 
-This is a template for novices learning C++. It requires no C++ or cmake experience.
+This is a template for novices learning *Programming: Principles and Practice Using C++ (3rd Edition)*. It requires no C++ or cmake experience.
 
 ## Software Requirements
 
@@ -32,6 +32,8 @@ In this template, you can simply add a program by:
 2. add `add_code(<program_name> <source_file1> [source_file2...])` (for example, `add_code(example_single src/example_single/main.cpp)`).
 3. Reconfigure the project by using some button or reopening the IDE.
 
+The headers used in book is configured correctly by default, just do the `add_code` step, then you can `#include "PPP.h"` or `#include "PPPheaders.h"` freely.
+
 **It's highly recommended to put your code inside `src` folder.**
 
 ### Headers
@@ -40,7 +42,49 @@ As for header files (`.h`, `.hpp`, etc.), you can simply put them together with 
 
 If you want to make a header file includable globally, you can put it inside `include` folder. For example, in `src/example_single` folder, `main.cpp` can `#include "add.hpp"` which is put inside `include` folder.
 
-## Install third-party libraries
+## `#include "PPP.h"` issues error?
+
+Currently the module feature is not supported well. You should use `#include "PPPheaders.h"` instead of `#include "PPP.h"` until:
+
+- (For IDE users) CMake 3.30 is released.
+- (For clangd users, possibly using VSCode, vim, etc.) clangd [supports module](https://github.com/llvm/llvm-project/pull/66462).
+
+## Install Qt
+
+Here I provide three ways to install Qt.
+
+### (recommended) Download Qt installer and install it manually
+
+1. Download Qt installer in [this link](https://www.qt.io/download-qt-installer-oss?utm_referrer=https%3A%2F%2Fwww.qt.io%2Fdownload-open-source).
+2. Double click the downloaded Qt installer to install it.
+
+For more details, see [villevoutilainen/ProgrammingPrinciplesAndPracticeUsingQt](https://github.com/villevoutilainen/ProgrammingPrinciplesAndPracticeUsingQt).
+
+### Use vcpkg
+
+Edit `CMakeLists.txt`, add a line `run_vcpkg()` between `include(fetch_project_options)` and `project(cpp_novice LANGUAGES CXX)`. That is:
+
+```cmake
+cmake_minimum_required(VERSION 3.25)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(fetch_project_options)
+
+run_vcpkg()
+project(cpp_novice LANGUAGES CXX)
+```
+
+Reopen your IDE. Then if you're lucky, the installation should have happened automatically.
+
+### Use conan
+
+1. Install conan 2 somehow.
+2. [Similarly](#use-vcpkg), add `run_conan()` between `include(fetch_project_options)` and `project(cpp_novice LANGUAGES CXX)`.
+3. Reopen your IDE.
+
+If you're lucky, the installation should have happened automatically.
+
+## Install other third-party libraries
 
 See [README_install_thirdparty_libraries](README_install_thirdparty_libraries.md).
 
