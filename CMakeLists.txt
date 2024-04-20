@@ -7,12 +7,14 @@ project(cpp_novice LANGUAGES CXX)
 
 include(enable_customized_project_options)
 include(add_code)
+add_subdirectory(support)
 
 # -----------------------------------------------------------------------------------------------------------------------
 add_code_options(
   DEPENDENCIES
 
   LIBRARIES
+  support
 
   INCLUDES
   include
