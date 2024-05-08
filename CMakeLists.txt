@@ -7,12 +7,14 @@ project(cpp_novice LANGUAGES CXX)
 
 include(enable_customized_project_options)
 include(add_code)
+add_subdirectory(support)
 
 # -----------------------------------------------------------------------------------------------------------------------
 add_code_options(
   DEPENDENCIES
 
   LIBRARIES
+  support
 
   INCLUDES
   include
@@ -21,6 +23,12 @@ add_code_options(
 # ------------------------------------------------------------------------------------------------------------------------
 add_code(test
   test/main.cpp
+)
+add_code(example_gui
+  src/example_gui/Graph.cpp
+  src/example_gui/Gui.cpp
+  src/example_gui/Main.cpp
+  src/example_gui/Window.cpp
 )
 add_code(example_single
   src/example_single/main.cpp

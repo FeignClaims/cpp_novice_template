@@ -2,6 +2,7 @@
 cmake_layout
 
 [requires]
+fltk/1.3.9
 
 [generators]
 CMakeDeps

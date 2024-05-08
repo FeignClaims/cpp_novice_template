@@ -1,7 +1,7 @@
 #include "hello.hpp"
 
-#include <iostream>
+#include "std_lib_facilities.h"
 
 void hello() {
-  std::cout << "hello world!\n";
+  cout << "hello world!\n";
 }
