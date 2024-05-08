@@ -1,8 +1,8 @@
-# cpp_novice_template
+# ppp2_novice_template
 
 [中文 (额外地, 有全网最全的 VSCode 配置教程)](请读我.md)
 
-This is a template for novices learning C++. It requires no C++ or cmake experience.
+This is a template for novices learning *Programming: Principles and Practice Using C++ (2rd Edition)*. It requires no C++ or cmake experience.
 
 ## Software Requirements
 
@@ -32,6 +32,8 @@ In this template, you can simply add a program by:
 2. add `add_code(<program_name> <source_file1> [source_file2...])` (for example, `add_code(example_single src/example_single/main.cpp)`).
 3. Reconfigure the project by using some button or reopening the IDE.
 
+The headers used in book is configured correctly by default, just do the `add_code` step, then you can `#include "std_lib_facilities.h"` freely.
+
 **It's highly recommended to put your code inside `src` folder.**
 
 ### Headers
@@ -40,7 +42,35 @@ As for header files (`.h`, `.hpp`, etc.), you can simply put them together with 
 
 If you want to make a header file includable globally, you can put it inside `include` folder. For example, in `src/example_single` folder, `main.cpp` can `#include "add.hpp"` which is put inside `include` folder.
 
-## Install third-party libraries
+## Install fltk
+
+Here I provide two ways to install fltk.
+
+### Use vcpkg
+
+Edit `CMakeLists.txt`, add a line `run_vcpkg()` between `include(fetch_project_options)` and `project(cpp_starter LANGUAGES CXX)`. That is:
+
+```cmake
+cmake_minimum_required(VERSION 3.25)
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(fetch_project_options)
+
+run_vcpkg()
+project(cpp_starter LANGUAGES CXX)
+```
+
+Reopen your IDE. Then if you're lucky, the installation should have happened automatically.
+
+### Use conan
+
+1. Install conan 2 somehow.
+2. [Similarly](#use-vcpkg), add `run_conan()` between `include(fetch_project_options)` and `project(cpp_starter LANGUAGES CXX)`.
+3. Reopen your IDE.
+
+If you're lucky, the installation should have happened automatically.
+
+## Install other third-party libraries
 
 See [README_install_thirdparty_libraries](README_install_thirdparty_libraries.md).
 
