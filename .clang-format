@@ -1,0 +1,73 @@
+BasedOnStyle: Google
+---
+Language: Cpp
+# AlignArrayOfStructures: Right  # Too many false positive
+AllowBreakBeforeNoexceptSpecifier: Always
+AllowShortCompoundRequirementOnASingleLine: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortLambdasOnASingleLine: Inline
+AlignConsecutiveAssignments:
+  Enabled: true
+  AlignCompound: true
+  PadOperators: true
+AlignConsecutiveBitFields: Consecutive
+AlignConsecutiveMacros: Consecutive
+AlignEscapedNewlines: Right
+AlignOperands: Align
+BreakAdjacentStringLiterals: true
+BreakAfterAttributes: Leave
+BreakBeforeBinaryOperators: All
+BreakBeforeInlineASMColon: OnlyMultiline
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 120
+DerivePointerAlignment: false
+EmptyLineBeforeAccessModifier: Always
+IncludeCategories:
+  - Regex: '^".*'
+    Priority: 1
+  - Regex: "^<[[:alnum:]_]+>"
+    Priority: 2
+  - Regex: "^<experimental/[[:alnum:]_]+>"
+    Priority: 2
+  - Regex: "^<gsl/[[:alnum:]_]+>"
+    Priority: 2
+  - Regex: "^<.*"
+    Priority: 3
+IncludeIsMainRegex: "([-_.](test|unittest|pass|fail))?$"
+IncludeIsMainSourceRegex: ""
+InsertBraces: true
+IntegerLiteralSeparator:
+  Binary: 4
+  Decimal: 0
+  Hex: 2
+IndentRequiresClause: true
+IndentPPDirectives: AfterHash
+InsertNewlineAtEOF: false
+LineEnding: LF
+NamespaceIndentation: Inner
+PackConstructorInitializers: NextLine
+RequiresClausePosition: OwnLine
+PointerAlignment: Left
+QualifierAlignment: Custom
+QualifierOrder:
+  [
+    "friend",
+    "inline",
+    "static",
+    "constexpr",
+    "type",
+    "restrict",
+    "const",
+    "volatile",
+  ]
+ReferenceAlignment: Pointer
+ReflowComments: false
+# RemoveParentheses: MultipleParentheses  # Too many false positive
+RemoveSemicolon: true
+RequiresExpressionIndentation: Keyword
+ShortNamespaceLines: 0
+StatementMacros:
+  - BOOST_HOF_RETURNS
+---
+

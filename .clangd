@@ -1,0 +1,27 @@
+Diagnostics:
+  Suppress: ["type_unsupported"]
+  ClangTidy:
+    # ClangTidy: See checks in file `.clang-tidy`
+    FastCheckFilter: Strict # Run only checks measured to be fast, https://clangd.llvm.org/config#fastcheckfilter
+  UnusedIncludes: Strict
+  # MissingIncludes: Strict # Uncomment it if required; might be too annoying
+Index:
+  Background: Build
+  StandardLibrary: Yes
+InlayHints:
+  Enabled: Yes
+  BlockEnd: Yes
+  DeducedTypes: Yes
+  Designators: Yes
+  ParameterNames: Yes
+  TypeNameLimit: 24
+Hover:
+  ShowAKA: Yes
+
+# Example on partly configuring some folder/files
+# ---
+# If:
+#   PathMatch: [test_98/.*]
+# Diagnostics:
+#  ClangTidy:
+#    Remove: ["*-owning-memory", "*-special-member-functions", modernize*]

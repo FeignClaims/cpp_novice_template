@@ -1,0 +1,7 @@
+[layout]
+cmake_layout
+
+[requires]
+
+[generators]
+CMakeDeps
