@@ -1,0 +1,22 @@
+{
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Clang-Tidy: fix current file",
+      "command": "clang-tidy",
+      "args": ["--fix-errors", "--use-color", "${file}"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "none",
+      "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    }
+  ],
+  "version": "2.0.0"
+}
