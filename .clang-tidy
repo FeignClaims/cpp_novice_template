@@ -1,19 +1,20 @@
 ---
-Checks: "clang-diagnostic-*,\
-  clang-analyzer-*,\
-  *,\
-  -abseil*,\
-  -altera*,\
-  -cert-dcl21-cpp,\
-  -fuchsia*,\
-  -llvmlib*,\
-  -llvm-include-order,\
-  -llvm-qualified-auto,\
-  -zircon*,\
-  -google-readability-todo,\
-  -modernize-use-trailing-return-type,\
-  -readability-qualified-auto,\
-  -readability-static-accessed-through-instance"
+Checks: >
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  *,
+  -abseil*,
+  -altera*,
+  -cert-dcl21-cpp,
+  -fuchsia*,
+  -llvmlib*,
+  -llvm-include-order,
+  -llvm-qualified-auto,
+  -zircon*,
+  -google-readability-todo,
+  -modernize-use-trailing-return-type,
+  -readability-qualified-auto,
+  -readability-static-accessed-through-instance,
 CheckOptions:
   readability-identifier-length.IgnoredVariableNames: n|ch|_|id|to|t|u|i|j|k
   readability-identifier-length.IgnoredParameterNames: n|ch|_|id|to|t|u|i|j|k
