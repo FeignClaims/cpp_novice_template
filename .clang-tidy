@@ -68,6 +68,7 @@ CheckOptions:
   # readability-identifier-naming.TemplateParameterCase: CamelCase
   # readability-identifier-naming.TemplateTemplateParameterCase: CamelCase
   # readability-identifier-naming.TypeAliasCase: lower_case
+  # readability-identifier-naming.TypeAliasIgnoredRegexp: "[a-z_]+_type"
   # readability-identifier-naming.TypedefCase: lower_case
   # readability-identifier-naming.TypeTemplateParameterCase: CamelCase
   # readability-identifier-naming.UnionCase: lower_case
