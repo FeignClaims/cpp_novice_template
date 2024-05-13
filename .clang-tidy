@@ -19,12 +19,14 @@ CheckOptions:
   readability-identifier-length.IgnoredVariableNames: n|ch|_|id|to|t|u|i|j|k
   readability-identifier-length.IgnoredParameterNames: n|ch|_|id|to|t|u|i|j|k
   # Force all lower_case: See https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html
-  # readability-identifier-naming.AbstractClassCase: lower_case
+  # readability-identifier-naming.AbstractClassCase: Leading_upper_snake_case
   # readability-identifier-naming.AggressiveDependentMemberLookup: false
-  # readability-identifier-naming.ClassCase: lower_case
+  # readability-identifier-naming.CheckAnonFieldInParent: True
+  # readability-identifier-naming.ClassCase: Leading_upper_snake_case
   # readability-identifier-naming.ClassConstantCase: lower_case
   # readability-identifier-naming.ClassMemberCase: lower_case
   # readability-identifier-naming.ClassMethodCase: lower_case
+  # readability-identifier-naming.ConceptCase: lower_case
   # readability-identifier-naming.ConstantCase: lower_case
   # readability-identifier-naming.ConstantMemberCase: lower_case
   # readability-identifier-naming.ConstantParameterCase: lower_case
@@ -32,7 +34,7 @@ CheckOptions:
   # readability-identifier-naming.ConstexprFunctionCase: lower_case
   # readability-identifier-naming.ConstexprMethodCase: lower_case
   # readability-identifier-naming.ConstexprVariableCase: lower_case
-  # readability-identifier-naming.EnumCase: lower_case
+  # readability-identifier-naming.EnumCase: Leading_upper_snake_case
   # readability-identifier-naming.EnumConstantCase: lower_case
   # readability-identifier-naming.FunctionCase: lower_case
   # readability-identifier-naming.GetConfigPerFile: true
@@ -64,15 +66,16 @@ CheckOptions:
   # readability-identifier-naming.ScopedEnumConstantCase: lower_case
   # readability-identifier-naming.StaticConstantCase: lower_case
   # readability-identifier-naming.StaticVariableCase: lower_case
-  # readability-identifier-naming.StructCase: lower_case
-  # readability-identifier-naming.TemplateParameterCase: CamelCase
-  # readability-identifier-naming.TemplateTemplateParameterCase: CamelCase
-  # readability-identifier-naming.TypeAliasCase: lower_case
+  # readability-identifier-naming.StructCase: Leading_upper_snake_case
+  # readability-identifier-naming.TemplateParameterCase: Leading_upper_snake_case
+  # readability-identifier-naming.TemplateTemplateParameterCase: Leading_upper_snake_case
+  # readability-identifier-naming.TypeAliasCase: Leading_upper_snake_case
   # readability-identifier-naming.TypeAliasIgnoredRegexp: "[a-z_]+_type"
-  # readability-identifier-naming.TypedefCase: lower_case
-  # readability-identifier-naming.TypeTemplateParameterCase: CamelCase
-  # readability-identifier-naming.UnionCase: lower_case
-  # readability-identifier-naming.ValueTemplateParameterCase: CamelCase
+  # readability-identifier-naming.TypedefCase: Leading_upper_snake_case
+  # readability-identifier-naming.TypedefIgnoredRegexp: "[a-z_]+_type"
+  # readability-identifier-naming.TypeTemplateParameterCase: Leading_upper_snake_case
+  # readability-identifier-naming.UnionCase: Leading_upper_snake_case
+  # readability-identifier-naming.ValueTemplateParameterCase: Leading_upper_snake_case
   # readability-identifier-naming.VariableCase: lower_case
   # readability-identifier-naming.VirtualMethodCase: lower_case
 WarningsAsErrors: ""
