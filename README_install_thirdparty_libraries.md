@@ -10,13 +10,13 @@ The template provides two ways of third-party library installation. You can mix 
 
 ### Enable vcpkg
 
-Edit `CMakeLists.txt` (located at the root of this repository folder), add a line `run_vcpkg()` between `include(fetch_project_options)` and `project(cpp_novice LANGUAGES CXX)`. That is:
+Edit `CMakeLists.txt` (located at the root of this repository folder), add a line `run_vcpkg()` between `include(cpp_novice_fetch_project_options)` and `project(cpp_novice LANGUAGES CXX)`. That is:
 
 ```cmake
 cmake_minimum_required(VERSION 3.25)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(fetch_project_options)
+include(cpp_novice_fetch_project_options)
 
 run_vcpkg()
 project(cpp_novice LANGUAGES CXX)
@@ -104,13 +104,13 @@ Install conan somehow. For example, you can download it from [the official websi
 
 ### Enable conan
 
-Edit `CMakeLists.txt` (located at the root of this repository file), add a line `run_conan()` between `include(fetch_project_options)` and `project(cpp_novice LANGUAGES CXX)`. That is:
+Edit `CMakeLists.txt` (located at the root of this repository file), add a line `run_conan()` between `include(cpp_novice_fetch_project_options)` and `project(cpp_novice LANGUAGES CXX)`. That is:
 
 ```cmake
 cmake_minimum_required(VERSION 3.25)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(fetch_project_options)
+include(cpp_novice_fetch_project_options)
 
 run_conan()
 project(cpp_novice LANGUAGES CXX)
