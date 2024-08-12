@@ -1,3 +1,7 @@
+CompileFlags:
+  Remove: # Remove false positive errors when using g++-14 with c++20 or above standard
+    - -fmodule*
+    - -fdeps-format*
 Diagnostics:
   Suppress:
     - type_unsupported
