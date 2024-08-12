@@ -1,12 +1,12 @@
-# - Customization point for project_options
-# This module sets all customization on dynamic_project_options
+# - Customization point for project_options: https://github.com/aminya/project_options
+# This module customizes and runs `dynamic_project_options(...)`.
 #
-# Include this module right after `project()` to make use
-#
-# If conan2 or vcpkg is requried, include(fetch_project_options) separately and invoke `run_conan2()` or `run_vcpkg()`
+# Note that this module should be included this module after `project(...)`.
 include_guard()
 
-include(${CMAKE_CURRENT_LIST_DIR}/fetch_project_options.cmake)
+if(NOT __project_options_POPULATED)
+  message(FATAL_ERROR "please `include(_fetch_project_options)`")
+endif()
 
 set(ENABLE_DEVELOPER_MODE ON)
 set(WARNINGS_AS_ERRORS_DEFAULT OFF)
@@ -26,6 +26,7 @@ set(ENABLE_CONTROL_FLOW_PROTECTION_DEFAULT ON)
 set(ENABLE_ELF_PROTECTION_DEFAULT OFF)
 set(ENABLE_OVERFLOW_PROTECTION_DEFAULT ON)
 set(ENABLE_RUNTIME_SYMBOLS_RESOLUTION_DEFAULT ON)
+
 if(WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   set(ENABLE_STACK_PROTECTION_DEFAULT OFF)
 else()
@@ -80,7 +81,7 @@ dynamic_project_options(
   -Wpacked
   -Wpedantic # warn if non-standard C++ is used
   -Wshadow # warn the user if a variable declaration shadows one from a parent context
-  -Wno-sign-conversion # 禁用符号转换检查
+  -Wno-sign-conversion # disable integral sign conversion checks
   -Wunused # warn on anything being unused
   -ftemplate-backtrace-limit=0
   -fconstexpr-backtrace-limit=0
@@ -103,7 +104,7 @@ dynamic_project_options(
   -Woverloaded-virtual
   -Wpedantic
   -Wshadow
-  -Wno-sign-conversion # 禁用符号转换检查
+  -Wno-sign-conversion # disable integral sign conversion checks
   -Wunused
   -Wuseless-cast # warn if you perform a cast to the same type
   -ftemplate-backtrace-limit=0
