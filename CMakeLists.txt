@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.25)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(fetch_project_options)
+include(cpp_novice_fetch_project_options)
 
 project(cpp_novice LANGUAGES CXX)
 
-include(enable_customized_project_options)
+include(cpp_novice_custom_project_options)
 include(add_code)
 add_subdirectory(support)
 
