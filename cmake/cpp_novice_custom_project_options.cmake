@@ -4,7 +4,7 @@
 # Note that this module should be included this module after `project(...)`.
 include_guard()
 
-if(NOT __project_options_POPULATED)
+if(NOT _cpp_novice_project_options_POPULATED)
   message(FATAL_ERROR "please `include(_fetch_project_options)`")
 endif()
 
