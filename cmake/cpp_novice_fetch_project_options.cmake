@@ -9,16 +9,16 @@ include_guard()
 
 macro(fetch_project_options git_repository git_tag)
   include(FetchContent)
-  FetchContent_Declare(__project_options
+  FetchContent_Declare(_cpp_novice_project_options
     GIT_REPOSITORY ${git_repository}
     GIT_TAG ${git_tag}
     GIT_SHALLOW true
     GIT_SUBMODULES ""
   )
-  FetchContent_MakeAvailable(__project_options)
-  include(${__project_options_SOURCE_DIR}/Index.cmake)
-  include(${__project_options_SOURCE_DIR}/src/DynamicProjectOptions.cmake)
+  FetchContent_MakeAvailable(_cpp_novice_project_options)
+  include(${_cpp_novice_project_options_SOURCE_DIR}/Index.cmake)
+  include(${_cpp_novice_project_options_SOURCE_DIR}/src/DynamicProjectOptions.cmake)
 endmacro()
 
 # Fetch from a mirror of https://github.com/aminya/project_options, since it is difficult to access github in China
-fetch_project_options(https://gitee.com/cpp_tutorial/project_options.git v0.36.0)
+fetch_project_options(https://gitee.com/cpp_tutorial/project_options.git v0.36.1)
