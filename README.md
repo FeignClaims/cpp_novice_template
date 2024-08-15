@@ -44,14 +44,18 @@ If you want to make a header file includable globally, you can put it inside `in
 
 ## `#include "PPP.h"` issues error?
 
-Currently the module feature is not supported well. You should use `#include "PPPheaders.h"` instead of `#include "PPP.h"` until:
+Currently the module feature is not supported well. If your `#include "PPP.h"` issues error, you should use `#include "PPPheaders.h"` instead of `#include "PPP.h"`.
 
-- (For IDE users) CMake 3.30 is released.
-- (For clangd users, possibly using VSCode, vim, etc.) clangd [supports module](https://github.com/llvm/llvm-project/pull/66462).
+**TLDR:** If you're using clang 18+ as the compiler or the latest version of Visual Studio 2022 as the IDE, you might be lucky enough to successfully #include "PPP.h". But for now, you'll usually fail, and continuing to tinker with it will leave you physically and mentally exhausted.
+
+click [here](https://arewemodulesyet.org/tools/) to see current tools support for module. What's more,
+
+- for MacOS homebrew clang users: There's a [bug](https://gitlab.kitware.com/cmake/cmake/-/issues/25965) for homebrew clang with CMake's standard module library support, which requires your manual fix.
+- for clangd users (possibly using VSCode, Qt Creator, vim, etc.): Although clangd has [supported module](https://github.com/llvm/llvm-project/pull/66462) since 19, it hasn't supported it very well.
 
 ## Install Qt
 
-Here I provide three ways to install Qt.
+Here I provide three ways to install Qt. After installation, You're able to use it in this project template directly.
 
 ### (recommended) Download Qt installer and install it manually
 
@@ -68,7 +72,8 @@ Edit `CMakeLists.txt`, add a line `run_vcpkg()` between `include(fetch_project_o
 cmake_minimum_required(VERSION 3.25)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-include(fetch_project_options)
+include(enable_cpp_module NO_POLICY_SCOPE)
+include(cpp_novice_fetch_project_options)
 
 run_vcpkg()
 project(cpp_novice LANGUAGES CXX)

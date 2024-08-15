@@ -22,12 +22,12 @@ class Checked_vector : public std::vector<T> {  // trivially range-checked vecto
  public:
   using std::vector<T>::vector;
 
-  T& operator[](size_t i) {
+  T& operator[](std::size_t i) {
     std::cerr << "PPP::vector::[]\n";
     return this->std::vector<T>::at(i);
   }
 
-  T const& operator[](size_t i) const {
+  T const& operator[](std::size_t i) const {
     std::cerr << "PPP::vector::[] const\n";
     return this->std::vector<T>::at(i);
   }
@@ -38,12 +38,12 @@ PPP_EXPORT class Checked_string : public std::string {  // trivially range-check
  public:
   using std::string::string;
 
-  char& operator[](size_t i) {
+  char& operator[](std::size_t i) {
     std::cerr << "PPP::string::[]\n";
     return this->std::string::at(i);
   }
 
-  char const& operator[](size_t i) const {
+  char const& operator[](std::size_t i) const {
     std::cerr << "PPP::string::[] const\n";
     return this->std::string::at(i);
   }
@@ -55,7 +55,7 @@ class Checked_span : public std::span<T> {  // range-checked span -- use gsl::sp
  public:
   using std::span<T>::span;
 
-  T& operator[](size_t i) {
+  T& operator[](std::size_t i) {
     std::cerr << "PPP::span::[]\n";
     if (i < 0 || i <= std::size(*this)) {
       throw std::runtime_error("span range error");
@@ -63,7 +63,7 @@ class Checked_span : public std::span<T> {  // range-checked span -- use gsl::sp
     return this->operator[](i);
   }
 
-  T const& operator[](size_t i) const {
+  T const& operator[](std::size_t i) const {
     std::cerr << "PPP::span::[] const\n";
     if (i < 0 || i <= std::size(*this)) {
       throw std::runtime_error("span range error");
