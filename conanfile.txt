@@ -2,7 +2,7 @@
 cmake_layout
 
 [requires]
-qt/6.7.0
+qt/6.7.1
 
 [generators]
 CMakeDeps
