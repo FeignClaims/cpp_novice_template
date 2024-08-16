@@ -50,7 +50,7 @@ Currently the module feature is not supported well. If your `#include "PPP.h"` i
 
 click [here](https://arewemodulesyet.org/tools/) to see current tools support for module. What's more,
 
-- for MacOS homebrew clang users: There's a [bug](https://gitlab.kitware.com/cmake/cmake/-/issues/25965) for homebrew clang with CMake's standard module library support, which requires your manual fix.
+- for MacOS homebrew clang users: There's a [bug](https://gitlab.kitware.com/cmake/cmake/-/issues/25965) for homebrew clang with CMake's standard module library support, which requires your manual fix. After fix, you should remove the if condition in the FIXME part of `cmake/detect_std_module.cmake` file to enable module support for this project template.
 - for clangd users (possibly using VSCode, Qt Creator, vim, etc.): Although clangd has [supported module](https://github.com/llvm/llvm-project/pull/66462) since 19, it hasn't supported it very well.
 
 ## Install Qt
