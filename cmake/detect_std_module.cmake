@@ -1,18 +1,20 @@
 include_guard()
 
 function(_reset_std_module_properties)
-  get_property(_targets DIRECTORY "${directory}" PROPERTY BUILDSYSTEM_TARGETS)
-  list(FILTER _targets INCLUDE REGEX [[__cmake_cxx.*]])
+  get_target_property(cxx_extensions_property cpp_novice_project_options CXX_EXTENSIONS)
 
-  foreach(target IN LISTS _targets)
-    if(TARGET ${std_module_target})
-      target_link_libraries(${std_module_target}
-          PRIVATE
-          cpp_novice_project_options
+  get_property(targets DIRECTORY "${directory}" PROPERTY BUILDSYSTEM_TARGETS)
+  list(FILTER targets INCLUDE REGEX [[__cmake_cxx.*]])
+
+  foreach(target IN LISTS targets)
+    if(TARGET ${target})
+      target_link_libraries(${target}
+        PRIVATE
+        cpp_novice_project_options
       )
-      set_target_properties(${std_module_target}
-          PROPERTIES
-        CXX_EXTENSIONS OFF
+      set_target_properties(${target}
+        PROPERTIES
+        CXX_EXTENSIONS ${cxx_extensions_property}
       )
     endif()
   endforeach()
