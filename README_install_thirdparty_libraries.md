@@ -37,7 +37,7 @@ Edit `vcpkg.json` (located at the root of this repository file) by simply adding
 
 For example, here's how we add `fmt` and `range-v3` library:
 
-```json
+```cmake
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "dependencies": ["fmt", "range-v3"]
@@ -69,15 +69,15 @@ After reopening your IDE (or reconfigure cmake), cmake should output messages so
 [cmake] -- Running vcpkg install - done
 ```
 
-Although the instruction is already simple, I simplified this in the template even further. Just edit the `add_code_options` function in `CMakeLists.txt` by:
+Although the instruction is already simple, I simplified this in the template even further. Just edit the `add_program_options` function in `CMakeLists.txt` by:
 
 - adding library names showed in `find_package(<name> CONFIG REQUIRED)` into `DEPENDENCIES` section.
 - adding target names showed in `target_link_libraries(main PRIVATE <name>)` into `LIBRARIES` section.
 
 For example, here's how we add `fmt` and `range-v3` library:
 
-```json
-add_code_options(
+```cmake
+add_program_options(
   DEPENDENCIES
   fmt
   range-v3
@@ -160,15 +160,15 @@ After reopening your IDE (or reconfigure cmake), cmake should output messages so
 [cmake] Install finished successfully
 ```
 
-Although the instruction is already simple, I simplified this in the template even further. Just edit the `add_code_options` function in `CMakeLists.txt` by:
+Although the instruction is already simple, I simplified this in the template even further. Just edit the `add_program_options` function in `CMakeLists.txt` by:
 
 - adding library names showed in `find_package(<name>)` into `DEPENDENCIES` section.
 - adding target names showed in `target_link_libraries(... <name>)` into `LIBRARIES` section.
 
 For example, here's how we add `fmt` and `range-v3` library:
 
-```json
-add_code_options(
+```cmake
+add_program_options(
   DEPENDENCIES
   fmt
   range-v3
