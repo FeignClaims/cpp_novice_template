@@ -6,10 +6,10 @@ include(cpp_novice_fetch_project_options)
 project(cpp_novice LANGUAGES CXX)
 
 include(cpp_novice_custom_project_options)
-include(add_code)
+include(add_program)
 
 # -----------------------------------------------------------------------------------------------------------------------
-add_code_options(
+add_program_options(
   DEPENDENCIES
 
   LIBRARIES
@@ -19,13 +19,13 @@ add_code_options(
 )
 
 # ------------------------------------------------------------------------------------------------------------------------
-add_code(test
+add_program(test
   test/main.cpp
 )
-add_code(example_single
+add_program(example_single
   src/example_single/main.cpp
 )
-add_code(example_multiple
+add_program(example_multiple
   src/example_multiple/main.cpp
   src/example_multiple/hello.cpp
 )
