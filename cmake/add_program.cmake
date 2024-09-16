@@ -4,7 +4,7 @@ if(NOT TARGET code_options)
   add_library(code_options INTERFACE)
 endif()
 
-function(add_code_options)
+function(add_program_options)
   set(options)
   set(one_value_args)
   set(multi_value_args DEPENDENCIES LIBRARIES INCLUDES)
@@ -19,7 +19,7 @@ function(add_code_options)
   target_include_directories(code_options INTERFACE ${args_INCLUDES})
 endfunction()
 
-function(add_code name)
+function(add_program name)
   add_executable(${name})
   target_sources(${name}
     PRIVATE
