@@ -29,7 +29,9 @@ The best thing about studying C++ with cmake is that a single project can manage
 In this template, you can simply add a program by:
 
 1. open `CMakeLists.txt` in the root folder.
-2. add `add_program(<program_name> <source_file1> [source_file2...])` (for example, `add_program(example_single src/example_single/main.cpp)`).
+2. add `add_program(<program_name> <source_file1> [source_file2...])`. For example,
+   - `add_program(example_single src/example_single/main.cpp)` adds an executable named `example_single`, with its associated code file located at `src/example_single/main.cpp`. This code file contains an `int main()` function, which serves as the entry point for the program. After adding this line of `add_program`, we can use CMake to generate the program from the corresponding code and then execute the program.
+   - `add_program(example_multiple src/example_multiple/main.cpp src/example_multiple/hello.cpp)` adds an executable named `example_multiple`, with its associated code files located at `src/example_multiple/main.cpp` and `src/example_multiple/hello.cpp`. Among these code files, there is only one `int main()` function, which serves as the entry point for the program. After adding this line of `add_program`, we can use CMake to generate the program from the corresponding code and then execute the program.
 3. Reconfigure the project by using some button or reopening the IDE.
 
 **It's highly recommended to put your code inside `src` folder.**
