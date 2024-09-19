@@ -1,5 +1,11 @@
 # cpp_novice_template
 
+**:warning: The blue text is clickable!**
+
+**:warning: The blue text is clickable!**
+
+**:warning: The blue text is clickable!**
+
 [中文](请读我.md)
 
 Here are some templates created for C++ novices to smoothly learn C++ without any programming experience.
