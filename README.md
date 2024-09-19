@@ -1,5 +1,11 @@
 # ppp2_novice_template
 
+**:warning: The blue text is clickable!**
+
+**:warning: The blue text is clickable!**
+
+**:warning: The blue text is clickable!**
+
 [中文 (额外地, 有全网最全的 VSCode 配置教程)](请读我.md)
 
 This is a template for novices learning *Programming: Principles and Practice Using C++ (2rd Edition)*. It requires no C++ or cmake experience.
