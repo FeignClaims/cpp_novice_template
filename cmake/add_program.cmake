@@ -1,3 +1,18 @@
+# - Wraps cmake to simplify the work of adding a new program
+#
+# The below function will create a new executable target, then novices could build it, run it or debug it as normal.
+#
+#   add_program(<program_name> [source_files1...])
+#
+# The below function will add dependencies, libraries and includes to the global config, thus they're usable by all
+#   programs added by `add_program`.
+#
+#   add_program_options(
+#     [DEPENDENCIES [dependency1...]]
+#     [LIBRARIES [library1...]]
+#     [INCLUDES [include1...]]
+#   )
+#
 include_guard()
 
 if(NOT TARGET code_options)
