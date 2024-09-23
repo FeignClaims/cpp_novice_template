@@ -16,6 +16,7 @@ Edit `CMakeLists.txt` (located at the root of this repository folder), add a lin
 cmake_minimum_required(VERSION 3.25)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(fix_msvc)
 include(cpp_novice_fetch_project_options)
 
 run_vcpkg()
@@ -110,6 +111,7 @@ Edit `CMakeLists.txt` (located at the root of this repository file), add a line 
 cmake_minimum_required(VERSION 3.25)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(fix_msvc)
 include(cpp_novice_fetch_project_options)
 
 run_conan()

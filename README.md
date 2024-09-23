@@ -62,6 +62,7 @@ Edit `CMakeLists.txt`, add a line `run_vcpkg()` between `include(fetch_project_o
 cmake_minimum_required(VERSION 3.25)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(fix_msvc)
 include(fetch_project_options)
 
 run_vcpkg()
