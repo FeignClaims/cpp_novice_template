@@ -1,3 +1,8 @@
+# - Detects and enables `import std;`
+# This module detects whether the ``import std;`` feature since C++23 is usable in the current toolchain and enables it 
+# if possible.
+#
+# Note that this module should be included after `project(...)`. 
 include_guard()
 
 function(_reset_std_module_properties)

@@ -1,3 +1,7 @@
+# - Enables C++ module
+# This module enables the experimental C++ module feature since C++20.
+#
+# Note that this module should be included before `project(...)` with the `NO_POLICY_SCOPE` argument.
 include_guard()
 
 # Enable import scanning if supported
