@@ -24,9 +24,9 @@ ColumnLimit: 120
 DerivePointerAlignment: false
 EmptyLineBeforeAccessModifier: Always
 IncludeCategories:
-  - Regex: '.*std_lib_facilities.h.*'
+  - Regex: ".*std_lib_facilities.h.*"
     Priority: 2
-  - Regex: '.*fltk.h.*'
+  - Regex: ".*fltk.h.*"
     Priority: 3
   - Regex: '^".*'
     Priority: 1
