@@ -1,15 +1,13 @@
 CompileFlags:
   Remove: # Remove false positive errors when using g++-14 with c++20 or above standard
-    - "-fmodule*"
-    - "-fdeps-format*"
+    - '-fmodule*'
+    - '-fdeps-format*'
 Diagnostics:
   Suppress:
-    - "type_unsupported"
+    - 'type_unsupported'
   ClangTidy:
     # ClangTidy: See checks in file `.clang-tidy`
     FastCheckFilter: Strict # Run only checks measured to be fast, https://clangd.llvm.org/config#fastcheckfilter
-  Includes:
-    AnalyzeAngledIncludes: Yes # Enables detection of unused angled includes that are not from the standard library
   UnusedIncludes: Strict
   # MissingIncludes: Strict # Uncomment it if required; might be too annoying
 Index:
@@ -29,11 +27,11 @@ Hover:
 # ---
 # If:
 #   PathMatch:
-#     - "test_98/.*"
-#     - "test_14/.*"
+#     - 'test_98/.*'
+#     - 'test_14/.*'
 # Diagnostics:
 #   ClangTidy:
-#     Remove:
-#       - "*-owning-memory"
-#       - "*-special-member-functions"
-#       - "modernize*"
+#     Remove: 
+#       - '*-owning-memory'
+#       - '*-special-member-functions'
+#       - 'modernize*'
