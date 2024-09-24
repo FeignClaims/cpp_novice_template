@@ -5,19 +5,28 @@ Checks: >
   *,
   -abseil*,
   -altera*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-narrowing-conversions,
   -cert-dcl21-cpp,
+  -cert-err58-cpp,
+  -cppcoreguidelines-narrowing-conversions,
   -fuchsia*,
-  -llvmlib*,
+  -google-build-using-namespace,
+  -google-readability-todo,
   -llvm-include-order,
   -llvm-qualified-auto,
-  -zircon*,
-  -google-readability-todo,
+  -llvmlib*,
+  -misc-non-private-member-variables-in-classes,
+  -modernize-pass-by-value,
   -modernize-use-trailing-return-type,
+  -performance-enum-size,
+  -performance-unnecessary-value-param,
   -readability-qualified-auto,
   -readability-static-accessed-through-instance,
+  -zircon*,
 CheckOptions:
-  readability-identifier-length.IgnoredVariableNames: n|ch|_|id|to|t|u|i|j|k
-  readability-identifier-length.IgnoredParameterNames: n|ch|_|id|to|t|u|i|j|k
+  readability-identifier-length.IgnoredVariableNames: n|ch|_|id|to|t|u|i|j|k|op
+  readability-identifier-length.IgnoredParameterNames: n|ch|_|id|to|t|u|i|j|k|op
   # Force all lower_case: See https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html
   # readability-identifier-naming.AbstractClassCase: Leading_upper_snake_case
   # readability-identifier-naming.AggressiveDependentMemberLookup: false
