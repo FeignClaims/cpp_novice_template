@@ -73,7 +73,7 @@ Reopen your IDE. Then if you're lucky, the installation should have happened aut
 
 ### Use conan
 
-1. Install conan 2 somehow.
+1. Install conan 2 somehow. For example, you can download it from [the official website](https://conan.io/downloads).
 2. [Similarly](#use-vcpkg), add `run_conan()` between `include(fetch_project_options)` and `project(cpp_starter LANGUAGES CXX)`.
 3. Reopen your IDE.
 
