@@ -17,6 +17,17 @@ macro(fetch_project_options git_repository git_tag)
     SOURCE_SUBDIR this-directory-does-not-exist # Avoid add_subdirectory automatically
   )
   FetchContent_MakeAvailable(_cpp_novice_project_options)
+
+  # Fetch from a mirror of https://github.com/MarkSchofield/WindowsToolchain, since it is difficult to access github in China
+  file(READ ${_cpp_novice_project_options_SOURCE_DIR}/src/VCEnvironment.cmake file_content)
+  string(REPLACE
+    "github.com/MarkSchofield/WindowsToolchain"
+    "gitee.com/cpp_tutorial/windows-toolchain"
+    file_content
+    "${file_content}"
+  )
+  file(WRITE ${_cpp_novice_project_options_SOURCE_DIR}/src/VCEnvironment.cmake ${file_content})
+
   include(${_cpp_novice_project_options_SOURCE_DIR}/src/Index.cmake)
   include(${_cpp_novice_project_options_SOURCE_DIR}/src/DynamicProjectOptions.cmake)
 endmacro()
