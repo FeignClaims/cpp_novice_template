@@ -1,4 +1,4 @@
-// PPP_support.h
+// PPP_support.inc
 
 /*
 	simple "Programming: Principles and Practice using C++ (3rd edition)" support
@@ -27,7 +27,7 @@ class Checked_vector : public std::vector<T> {  // trivially range-checked vecto
     return this->std::vector<T>::at(i);
   }
 
-  T const& operator[](std::size_t i) const {
+  const T& operator[](std::size_t i) const {
     std::cerr << "PPP::vector::[] const\n";
     return this->std::vector<T>::at(i);
   }
@@ -43,7 +43,7 @@ PPP_EXPORT class Checked_string : public std::string {  // trivially range-check
     return this->std::string::at(i);
   }
 
-  char const& operator[](std::size_t i) const {
+  const char& operator[](std::size_t i) const {
     std::cerr << "PPP::string::[] const\n";
     return this->std::string::at(i);
   }
@@ -63,7 +63,7 @@ class Checked_span : public std::span<T> {  // range-checked span -- use gsl::sp
     return this->operator[](i);
   }
 
-  T const& operator[](std::size_t i) const {
+  const T& operator[](std::size_t i) const {
     std::cerr << "PPP::span::[] const\n";
     if (i < 0 || i <= std::size(*this)) {
       throw std::runtime_error("span range error");
@@ -79,16 +79,16 @@ PPP_EXPORT struct Exit : std::runtime_error {
   Exit() : std::runtime_error("Exit") {}
 };
 
-PPP_EXPORT inline void error(std::string const& s)  // error() simply disguises throws
+PPP_EXPORT [[noreturn]] inline void error(const std::string& s)  // error() simply disguises throws
 {
   throw std::runtime_error(s);
 }
 
-PPP_EXPORT inline void error(std::string const& s, std::string const& s2) {
+PPP_EXPORT [[noreturn]] inline void error(const std::string& s, const std::string& s2) {
   error(s + s2);
 }
 
-PPP_EXPORT inline void error(std::string const& s, int i) {
+PPP_EXPORT [[noreturn]] inline void error(const std::string& s, int i) {
   std::ostringstream os;
   os << s << ": " << i;
   error(os.str());
@@ -136,14 +136,14 @@ constexpr T narrow_cast(U&& u) noexcept {
 }
 
 PPP_EXPORT struct narrowing_error : public std::exception {
-  char const* what() const noexcept override {
+  const char* what() const noexcept override {
     return "narrowing_error";
   }
 };
 
 PPP_EXPORT template <class T, class U>
 constexpr T narrow(U u) {
-  T const t = narrow_cast<T>(u);
+  const T t = narrow_cast<T>(u);
   if (static_cast<U>(t) != u) {
     throw narrowing_error{};
   }
@@ -152,15 +152,15 @@ constexpr T narrow(U u) {
 
 //------- random numbers ------
 
-PPP_EXPORT std::default_random_engine& get_rand() {
+PPP_EXPORT inline std::default_random_engine& get_rand() {
   static std::default_random_engine ran;
   return ran;
 }
 
-PPP_EXPORT void seed(int s) {
+PPP_EXPORT inline void seed(int s) {
   get_rand().seed(s);
 }
-PPP_EXPORT void seed() {
+PPP_EXPORT inline void seed() {
   get_rand().seed();
 }
 

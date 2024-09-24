@@ -2,7 +2,10 @@
 
 // NOLINTBEGIN
 #include <algorithm>      // IWYU pragma: export
+#include <cstddef>        // IWYU pragma: export
 #include <cstdint>        // IWYU pragma: export
+#include <exception>      // IWYU pragma: export
+#include <functional>     // IWYU pragma: export
 #include <iostream>       // IWYU pragma: export
 #include <list>           // IWYU pragma: export
 #include <map>            // IWYU pragma: export
