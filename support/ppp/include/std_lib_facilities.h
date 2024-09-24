@@ -136,15 +136,15 @@ struct Exit : runtime_error {
 };
 
 // error() simply disguises throws:
-inline void error(string const& s) {
+[[noreturn]] inline void error(string const& s) {
   throw runtime_error(s);
 }
 
-inline void error(string const& s, string const& s2) {
+[[noreturn]] inline void error(string const& s, string const& s2) {
   error(s + s2);
 }
 
-inline void error(string const& s, int i) {
+[[noreturn]] inline void error(string const& s, int i) {
   ostringstream os;
   os << s << ": " << i;
   error(os.str());
@@ -182,7 +182,7 @@ inline void keep_window_open(string const& s) {
 }
 
 // error function to be used (only) until error() is introduced in Chapter 5:
-inline void simple_error(string const& s)  // write ``error: s and exit program
+[[noreturn]] inline void simple_error(string const& s)  // write ``error: s and exit program
 {
   cerr << "error: " << s << '\n';
   keep_window_open();  // for some Windows environments
