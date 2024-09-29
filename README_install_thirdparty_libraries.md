@@ -183,3 +183,28 @@ add_program_options(
 Reopen your IDE (or reconfigure cmake in your IDE somehow) again.
 
 Done.
+
+## Use CMake's built-in support for certain third-party libraries
+
+:warning: It is recommended to learn CMake through [*Modern CMake for C++*](https://github.com/PacktPublishing/Modern-CMake-for-Cpp).
+
+The previously mentioned tools, vcpkg and conan, are used to download (compile,) and install third-party libraries, and then provide CMake, which manages C++ projects, with a `Find<PackageName>.cmake`, `<package_name>-config.cmake`, or `<PackageName>Config.cmake` file, so that CMake can successfully locate and use these third-party libraries.
+
+CMake itself also supports some third-party libraries (such as [`FindOpenMP.cmake`](https://cmake.org/cmake/help/latest/module/FindOpenMP.html) and [`FindQt.cmake`](https://cmake.org/cmake/help/latest/module/FindQt.html)), so as long as you install these libraries into the system path, you can use them in CMake:
+
+```cmake
+add_program_options(
+  DEPENDENCIES
+  OpenMP
+
+  LIBRARIES
+  OpenMP::OpenMP_CXX
+
+  INCLUDES
+  include
+)
+```
+
+Reopen your IDE (or reconfigure cmake in your IDE somehow) again.
+
+Done.
