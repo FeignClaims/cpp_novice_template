@@ -104,7 +104,7 @@ See [README_install_thirdparty_libraries](README_install_thirdparty_libraries.md
 
 ## References
 
-I learnt cmake mostly from [*Modern CMake for C++*](https://github.com/PacktPublishing/Modern-CMake-for-Cpp).
+I learnt cmake mostly from [*Modern CMake for C++*](https://github.com/PacktPublishing/Modern-CMake-for-Cpp); my C++ learning map is listed in [学习大纲](https://question-board.readthedocs.io/learning_map/main.html) (although the table of contents is in Chinese, almost all resources in it are in English).
 
 What's more, this repository highly depends on [aminya/project_options](https://github.com/aminya/project_options), which improves the CMake experience a lot.
 
