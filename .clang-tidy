@@ -17,6 +17,7 @@ Checks: >
   -llvm-qualified-auto,
   -llvmlib*,
   -misc-non-private-member-variables-in-classes,
+  -misc-use-internal-linkage,
   -modernize-pass-by-value,
   -modernize-use-trailing-return-type,
   -performance-enum-size,
