@@ -1,4 +1,6 @@
-// PPP_support.inc
+#define PPP_EXPORT
+
+// PPP_support-inl.h
 
 /*
 	simple "Programming: Principles and Practice using C++ (3rd edition)" support
@@ -8,70 +10,30 @@
 
 // NOLINTBEGIN
 namespace PPP {
-
-using Unicode = long;
+using Unicode = std::int64_t;
 
 // ------- first range checking -----
 // primitive but most helpful to learners and portable
 
-template <class T>
+template <typename T>
 concept Element = true;
 
-PPP_EXPORT template <Element T>
-class Checked_vector : public std::vector<T> {  // trivially range-checked vector (no iterator checking)
- public:
-  using std::vector<T>::vector;
+/*
+  NOTE from the author of https://github.com/FeignClaims/cpp_novice_template:
 
-  T& operator[](std::size_t i) {
-    std::cerr << "PPP::vector::[]\n";
-    return this->std::vector<T>::at(i);
-  }
+  Checked_vector, Checked_string and Checked_span are removed because this C++ project template enables range checking
+    with sanitizers by default.
 
-  const T& operator[](std::size_t i) const {
-    std::cerr << "PPP::vector::[] const\n";
-    return this->std::vector<T>::at(i);
-  }
-  //  ...
-};  // range-checked vector
+  You could view the original code through https://www.stroustrup.com/PPP_support.h. However, there're bugs in the
+    implementation.
+*/
+template <typename Value, typename Allocator = std::allocator<Value>>
+using Checked_vector = std::vector<Value, Allocator>;
 
-PPP_EXPORT class Checked_string : public std::string {  // trivially range-checked string (no iterator checking)
- public:
-  using std::string::string;
+using Checked_string = std::string;
 
-  char& operator[](std::size_t i) {
-    std::cerr << "PPP::string::[]\n";
-    return this->std::string::at(i);
-  }
-
-  const char& operator[](std::size_t i) const {
-    std::cerr << "PPP::string::[] const\n";
-    return this->std::string::at(i);
-  }
-  // ...
-};  // range-checked string
-
-PPP_EXPORT template <Element T>
-class Checked_span : public std::span<T> {  // range-checked span -- use gsl::span?
- public:
-  using std::span<T>::span;
-
-  T& operator[](std::size_t i) {
-    std::cerr << "PPP::span::[]\n";
-    if (i < 0 || i <= std::size(*this)) {
-      throw std::runtime_error("span range error");
-    }
-    return this->operator[](i);
-  }
-
-  const T& operator[](std::size_t i) const {
-    std::cerr << "PPP::span::[] const\n";
-    if (i < 0 || i <= std::size(*this)) {
-      throw std::runtime_error("span range error");
-    }
-  }
-
-  // needs deduction !!!
-};
+template <typename T, std::size_t Extent = std::dynamic_extent>
+using Checked_span = std::span<T, Extent>;
 
 //------- error handling ------
 
@@ -79,23 +41,23 @@ PPP_EXPORT struct Exit : std::runtime_error {
   Exit() : std::runtime_error("Exit") {}
 };
 
-PPP_EXPORT [[noreturn]] inline void error(const std::string& s)  // error() simply disguises throws
-{
-  throw std::runtime_error(s);
+// error() simply disguises throws
+PPP_EXPORT [[noreturn]] inline void error(std::string const& message) {
+  throw std::runtime_error(message);
 }
 
-PPP_EXPORT [[noreturn]] inline void error(const std::string& s, const std::string& s2) {
-  error(s + s2);
+PPP_EXPORT [[noreturn]] inline void error(std::string const& message_1, std::string const& message_2) {
+  error(message_1 + message_2);
 }
 
-PPP_EXPORT [[noreturn]] inline void error(const std::string& s, int i) {
-  std::ostringstream os;
-  os << s << ": " << i;
-  error(os.str());
+PPP_EXPORT [[noreturn]] inline void error(std::string const& message, int i) {
+  std::ostringstream ostream;
+  ostream << message << ": " << i;
+  error(ostream.str());
 }
 
 PPP_EXPORT enum class Error_action { ignore, throwing, terminating, logging, error };
-struct except_error : std::runtime_error {
+struct Expect_error : std::runtime_error {
   using runtime_error::runtime_error;
 };
 
@@ -103,29 +65,21 @@ struct except_error : std::runtime_error {
 PPP_EXPORT constexpr Error_action default_error_action = Error_action::error;
 
 // take an action if an expected condition doesn't hold:
-PPP_EXPORT template <Error_action action = default_error_action, typename C>
-constexpr void expect(C cond, std::string mess) {
-  if constexpr (action == Error_action::logging) {
-    if (!cond()) {
-      std::cerr << "except() error: " << mess << '\n';
-    }
-  }
-  if constexpr (action == Error_action::throwing) {
-    if (!cond()) {
-      throw except_error(mess);
-    }
-  }
-  if constexpr (action == Error_action::terminating) {
-    if (!cond()) {
+PPP_EXPORT template <Error_action Action = default_error_action, typename Condition>
+constexpr void expect(Condition condition, std::string const& message) {
+  if (!condition()) {
+    if constexpr (Action == Error_action::logging) {
+      std::cerr << "expect() error: " << message << '\n';
+    } else if constexpr (Action == Error_action::throwing) {
+      throw Expect_error(message);
+    } else if constexpr (Action == Error_action::terminating) {
       std::terminate();
+    } else if constexpr (Action == Error_action::error) {
+      PPP::error(message);
+    } else {
+      static_assert(false, "unkown error_action");
     }
   }
-  if constexpr (action == Error_action::error) {
-    if (!cond()) {
-      PPP::error(mess);
-    }
-  }
-  // or no action
 }
 
 //-------- narrowing --------
@@ -136,14 +90,14 @@ constexpr T narrow_cast(U&& u) noexcept {
 }
 
 PPP_EXPORT struct narrowing_error : public std::exception {
-  const char* what() const noexcept override {
+  [[nodiscard]] char const* what() const noexcept override {
     return "narrowing_error";
   }
 };
 
 PPP_EXPORT template <class T, class U>
 constexpr T narrow(U u) {
-  const T t = narrow_cast<T>(u);
+  T const t = narrow_cast<T>(u);
   if (static_cast<U>(t) != u) {
     throw narrowing_error{};
   }
@@ -153,12 +107,12 @@ constexpr T narrow(U u) {
 //------- random numbers ------
 
 PPP_EXPORT inline std::default_random_engine& get_rand() {
-  static std::default_random_engine ran;
-  return ran;
+  static std::default_random_engine engine;
+  return engine;
 }
 
-PPP_EXPORT inline void seed(int s) {
-  get_rand().seed(s);
+PPP_EXPORT inline void seed(int seed) {
+  get_rand().seed(static_cast<unsigned int>(seed));
 }
 PPP_EXPORT inline void seed() {
   get_rand().seed();
@@ -177,16 +131,5 @@ using Value_type = typename C::value_type;
 
 template <typename C>
 using Iterator = typename C::iterator;
-
 }  // namespace PPP
-// make std::min() and std::max() accessible on systems with antisocial macros:
-#undef min
-#undef max
-
-template <>
-struct std::hash<PPP::Checked_string> {
-  size_t operator()(const PPP::Checked_string& s) const {
-    return hash<std::string>()(s);
-  }
-};
 // NOLINTEND
