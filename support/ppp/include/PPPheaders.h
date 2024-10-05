@@ -20,7 +20,7 @@
 #include <vector>         // IWYU pragma: export
 
 #define PPP_EXPORT
-#include "PPP_support.inc"
+#include "PPP_support-inl.h"
 
 using namespace std;
 using namespace PPP;
