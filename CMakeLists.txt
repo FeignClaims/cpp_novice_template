@@ -6,6 +6,7 @@ include(cpp_novice_fetch_project_options)
 
 project(cpp_novice LANGUAGES CXX)
 
+include(ppp_check_compiler)
 include(cpp_novice_custom_project_options)
 include(add_program)
 add_subdirectory(support)
