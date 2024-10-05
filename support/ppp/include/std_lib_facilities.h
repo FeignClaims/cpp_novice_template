@@ -26,7 +26,6 @@ Revised August 3, 2020: a cleanup removing support for ancient compilers
 #ifndef H112
 #define H112 080315L
 
-// NOLINTBEGIN
 #include <algorithm>      // IWYU pragma: export
 #include <array>          // IWYU pragma: export
 #include <cmath>          // IWYU pragma: export
@@ -35,13 +34,17 @@ Revised August 3, 2020: a cleanup removing support for ancient compilers
 #include <forward_list>   // IWYU pragma: export
 #include <fstream>        // IWYU pragma: export
 #include <iomanip>        // IWYU pragma: export
+#include <ios>            // IWYU prgama: export
 #include <iostream>       // IWYU pragma: export
+#include <limits>         // IWYU pragma: export
 #include <list>           // IWYU pragma: export
+#include <memory>         // IWYU pragma: export
 #include <random>         // IWYU pragma: export
 #include <regex>          // IWYU pragma: export
 #include <sstream>        // IWYU pragma: export
 #include <stdexcept>      // IWYU pragma: export
 #include <string>         // IWYU pragma: export
+#include <type_traits>    // IWYU pragma: export
 #include <unordered_map>  // IWYU pragma: export
 #include <vector>         // IWYU pragma: export
 
@@ -53,11 +56,11 @@ using Unicode = std::int64_t;
 
 using namespace std;
 
-template <class T>
+template <typename T>
 string to_string(T const& t) {
-  ostringstream os;
-  os << t;
-  return os.str();
+  ostringstream ostream;
+  ostream << t;
+  return ostream.str();
 }
 
 struct Range_error : out_of_range {  // enhanced vector range error reporting
@@ -65,96 +68,41 @@ struct Range_error : out_of_range {  // enhanced vector range error reporting
   Range_error(int i) : out_of_range("Range error: " + to_string(i)), index(i) {}
 };
 
-// trivially range-checked vector (no iterator checking):
-template <class T>
-struct Vector : public std::vector<T> {
-  using size_type = typename std::vector<T>::size_type;
+/*
+  NOTE from the author of https://github.com/FeignClaims/cpp_novice_template:
 
-  /* #ifdef _MSC_VER
-	// microsoft doesn't yet support C++11 inheriting constructors
-	Vector() { }
-	explicit Vector(size_type n) :std::vector<T>(n) {}
-	Vector(size_type n, const T& v) :std::vector<T>(n, v) {}
-	template <class I>
-	Vector(I first, I last) : std::vector<T>(first, last) {}
-	Vector(initializer_list<T> list) : std::vector<T>(list) {}
+  Vector and String are removed because this C++ project template enables range checking with sanitizers by default.
+
+  You could view the original code through https://www.stroustrup.com/Programming/std_lib_facilities.h.
 */
-  using std::vector<T>::vector;  // inheriting constructor
+template <typename Value, typename Allocator = std::allocator<Value>>
+using Vector = std::vector<Value>;
 
-  T& operator[](unsigned int i)  // rather than return at(i);
-  {
-    if (i < 0 || this->size() <= i) {
-      throw Range_error(i);
-    }
-    return std::vector<T>::operator[](i);
-  }
-  T const& operator[](unsigned int i) const {
-    if (i < 0 || this->size() <= i) {
-      throw Range_error(i);
-    }
-    return std::vector<T>::operator[](i);
-  }
-};
-
-// disgusting macro hack to get a range checked vector:
-#define vector Vector
-
-// trivially range-checked string (no iterator checking):
-struct String : std::string {
-  using size_type = std::string::size_type;
-  //	using string::string;
-
-  char& operator[](unsigned int i)  // rather than return at(i);
-  {
-    if (i < 0 || size() <= i) {
-      throw Range_error(i);
-    }
-    return std::string::operator[](i);
-  }
-
-  char const& operator[](unsigned int i) const {
-    if (i < 0 || size() <= i) {
-      throw Range_error(i);
-    }
-    return std::string::operator[](i);
-  }
-};
-
-namespace std {
-
-template <>
-struct hash<String> {
-  size_t operator()(String const& s) const {
-    return hash<std::string>()(s);
-  }
-};
-
-}  // namespace std
+using String = std::string;
 
 struct Exit : runtime_error {
   Exit() : runtime_error("Exit") {}
 };
 
 // error() simply disguises throws:
-[[noreturn]] inline void error(string const& s) {
-  throw runtime_error(s);
+[[noreturn]] inline void error(string const& message) {
+  throw runtime_error(message);
 }
 
-[[noreturn]] inline void error(string const& s, string const& s2) {
-  error(s + s2);
+[[noreturn]] inline void error(string const& message_1, string const& message_2) {
+  error(message_1 + message_2);
 }
 
-[[noreturn]] inline void error(string const& s, int i) {
-  ostringstream os;
-  os << s << ": " << i;
-  error(os.str());
+[[noreturn]] inline void error(string const& message, int i) {
+  ostringstream ostream;
+  ostream << message << ": " << i;
+  error(ostream.str());
 }
 
 template <class T>
 char* as_bytes(T& i)  // needed for binary I/O
 {
-  void* addr = &i;  // get the address of the first byte
-  // of memory used to store the object
+  void* addr = &i;                  // get the address of the first byte of memory used to store the object
   return static_cast<char*>(addr);  // treat that memory as bytes
 }
 
@@ -165,53 +113,52 @@ inline void keep_window_open() {
   cin >> ch;
 }
 
-inline void keep_window_open(string const& s) {
-  if (s == "") {
+inline void keep_window_open(string const& message) {
+  if (message == "") {
     return;
   }
   cin.clear();
-  cin.ignore(120, '\n');
+  cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   for (;;) {
-    cout << "Please enter " << s << " to exit\n";
-    string ss;
-    while (cin >> ss && ss != s) {
-      cout << "Please enter " << s << " to exit\n";
+    cout << "Please enter " << message << " to exit\n";
+    string input;
+    while (cin >> input && input != message) {
+      cout << "Please enter " << message << " to exit\n";
     }
     return;
   }
 }
 
 // error function to be used (only) until error() is introduced in Chapter 5:
-[[noreturn]] inline void simple_error(string const& s)  // write ``error: s and exit program
+[[noreturn]] inline void simple_error(string const& message)  // write ``error: s and exit program
 {
-  cerr << "error: " << s << '\n';
+  cerr << "error: " << message << '\n';
   keep_window_open();  // for some Windows environments
   exit(1);
 }
 
-// make std::min() and std::max() accessible on systems with antisocial macros:
-#undef min
-#undef max
-
 // run-time checked narrowing cast (type conversion). See ???.
-template <class R, class A>
-R narrow_cast(A const& a) {
-  R r = R(a);
-  if (A(r) != a) {
+template <typename T, typename U>
+T narrow_cast(U const& u) {
+  constexpr bool is_different_signedness{std::is_signed<T>::value != std::is_signed<U>::value};
+
+  T const t{static_cast<T>(u)};
+
+  if (static_cast<U>(t) != u || (is_different_signedness && ((t < T{}) != (u < U{})))) {
     error(string("info loss"));
   }
-  return r;
+  return t;
 }
 
 // random number generators. See 24.7.
 
 inline default_random_engine& get_rand() {
-  static default_random_engine ran;  // note: not thread_local
-  return ran;
+  static default_random_engine generator;  // note: not thread_local
+  return generator;
 }
 
-inline void seed_randint(int s) {
-  get_rand().seed(s);
+inline void seed_randint(int seed) {
+  get_rand().seed(static_cast<unsigned int>(seed));
 }
 
 inline int randint(int min, int max) {
@@ -226,34 +173,34 @@ inline int randint(int max) {
 
 // container algorithms. See 21.9.   // C++ has better versions of this:
 
-template <typename C>
-using Value_type = typename C::value_type;
+template <typename Container>
+using Value_type = typename Container::value_type;
 
-template <typename C>
-using Iterator = typename C::iterator;
+template <typename Container>
+using Iterator = typename Container::iterator;
 
-template <typename C>
-// requires Container<C>()
-void sort(C& c) {
-  std::sort(c.begin(), c.end());
+template <typename Container>
+// requires Container<Container>()
+void sort(Container& container) {
+  std::sort(container.begin(), container.end());
 }
 
-template <typename C, typename Pred>
-// requires Container<C>() && Binary_Predicate<Value_type<C>>()
-void sort(C& c, Pred p) {
-  std::sort(c.begin(), c.end(), p);
+template <typename Container, typename Pred>
+// requires Container<Container>() && Binary_Predicate<Value_type<Container>>()
+void sort(Container& container, Pred pred) {
+  std::sort(container.begin(), container.end(), pred);
 }
 
-template <typename C, typename Val>
-// requires Container<C>() && Equality_comparable<C,Val>()
-Iterator<C> find(C& c, Val v) {
-  return std::find(c.begin(), c.end(), v);
+template <typename Container, typename Value>
+// requires Container<Container>() && Equality_comparable<Container,Val>()
+Iterator<Container> find(Container& container, Value value) {
+  return std::find(container.begin(), container.end(), value);
 }
 
-template <typename C, typename Pred>
-// requires Container<C>() && Predicate<Pred,Value_type<C>>()
-Iterator<C> find_if(C& c, Pred p) {
-  return std::find_if(c.begin(), c.end(), p);
+template <typename Container, typename Pred>
+// requires Container<Container>() && Predicate<Pred,Value_type<Container>>()
+Iterator<Container> find_if(Container& container, Pred pred) {
+  return std::find_if(container.begin(), container.end(), pred);
 }
 // NOLINTEND
 
