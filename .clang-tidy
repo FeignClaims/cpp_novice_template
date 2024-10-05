@@ -3,6 +3,7 @@ Checks: >
   clang-diagnostic-*,
   clang-analyzer-*,
   *,
+  -*objc*,
   -abseil*,
   -altera*,
   -bugprone-easily-swappable-parameters,
