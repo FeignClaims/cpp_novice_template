@@ -7,7 +7,7 @@ include(cpp_novice_fetch_project_options)
 
 project(cpp_novice LANGUAGES CXX)
 
-include(ppp_check_compiler)
+include(check_latest_cppstd)
 include(cpp_novice_custom_project_options)
 include(detect_std_module)
 include(add_program)
