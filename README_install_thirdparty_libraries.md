@@ -43,7 +43,7 @@ For example, here's how we add `fmt` and `range-v3` library:
 }
 ```
 
-Reopen your IDE (or reconfigure cmake in your IDE somehow). If you're lucky, cmake will automatically install vcpkg for you, and use it to install `dependencies` you specified.
+Clear the CMake cache and reconfigure CMake in your IDE in some way (for example, you might delete the build or out folder and restart the software). If you're lucky, cmake will automatically install vcpkg for you, and use it to install `dependencies` you specified.
 
 ### Link libraries to our programs
 
@@ -142,7 +142,7 @@ range-v3/0.12.0
 CMakeDeps
 ```
 
-Reopen your IDE (or reconfigure cmake in your IDE somehow). If you're lucky, cmake will automatically use conan to install `[requires]` you specified.
+Clear the CMake cache and reconfigure CMake in your IDE in some way (for example, you might delete the build or out folder and restart the software). If you're lucky, cmake will automatically use conan to install `[requires]` you specified.
 
 ### Link libraries to our programs
 
@@ -205,6 +205,6 @@ add_program_options(
 )
 ```
 
-Reopen your IDE (or reconfigure cmake in your IDE somehow) again.
+Clear the CMake cache and reconfigure CMake in your IDE in some way (for example, you might delete the build or out folder and restart the software).
 
 Done.
