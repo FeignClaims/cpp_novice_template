@@ -88,13 +88,13 @@ run_vcpkg()
 project(cpp_novice LANGUAGES CXX)
 ```
 
-Reopen your IDE. Then if you're lucky, the installation should have happened automatically.
+Clear the CMake cache and reconfigure CMake in your IDE in some way (for example, you might delete the build or out folder and restart the software). Then if you're lucky, the installation should have happened automatically.
 
 ### Use conan
 
 1. Install conan 2 somehow. For example, you can download it from [the official website](https://conan.io/downloads).
 2. [Similarly](#use-vcpkg), add `run_conan()` between `include(fetch_project_options)` and `project(cpp_novice LANGUAGES CXX)`.
-3. Reopen your IDE.
+3. Clear the CMake cache and reconfigure CMake in your IDE in some way (for example, you might delete the build or out folder and restart the software).
 
 If you're lucky, the installation should have happened automatically.
 

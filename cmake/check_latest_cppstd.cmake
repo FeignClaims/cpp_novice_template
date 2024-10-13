@@ -1,5 +1,27 @@
 include_guard()
 
+macro(_add_cppstd_to_conan cppstd)
+  find_program(conan_command "conan")
+
+  if(conan_command-NOTFOUND)
+    return()
+  endif()
+
+  set(setting_file "${CMAKE_BINARY_DIR}/conan/settings_user.yml")
+  file(WRITE ${setting_file}
+    "compiler:
+  gcc:
+    cppstd: [\"${cppstd}\"]
+
+  clang:
+    cppstd: [\"${cppstd}\"]
+"
+  )
+  execute_process(
+    COMMAND ${conan_command} config install ${setting_file}
+  )
+endmacro()
+
 macro(_ppp_check_compiler minimum_version)
   set(steps 20)
   math(EXPR maximum_version "${minimum_version} + ${steps} * 3")
@@ -7,6 +29,7 @@ macro(_ppp_check_compiler minimum_version)
   foreach(version RANGE ${maximum_version} ${steps} -3) # [maximum_version, maximum_version - 3, ..., minimum_version]
     if(DEFINED "CMAKE_CXX${version}_STANDARD_COMPILE_OPTION" OR DEFINED "CMAKE_CXX${version}_EXTENSION_COMPILE_OPTION")
       set(CMAKE_CXX_STANDARD "${version}")
+      _add_cppstd_to_conan("${version}")
       return()
     endif()
   endforeach()
