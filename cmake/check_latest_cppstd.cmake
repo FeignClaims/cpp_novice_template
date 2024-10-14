@@ -8,15 +8,23 @@ macro(_add_cppstd_to_conan cppstd)
   endif()
 
   set(setting_file "${CMAKE_BINARY_DIR}/conan/settings_user.yml")
+
+  string(REGEX REPLACE [[\..*]] "" compiler_major_version ${CMAKE_CXX_COMPILER_VERSION})
+
+  if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    set(compiler "clang")
+  elseif(CMAKE_CXX_COMPILER_ID MATCHES ".*GNU.*")
+    set(compiler "gcc")
+  endif()
+
   file(WRITE ${setting_file}
     "compiler:
-  gcc:
-    cppstd: [\"${cppstd}\"]
-
-  clang:
+  ${compiler}:
+    version: [\"${compiler_major_version}\"]
     cppstd: [\"${cppstd}\"]
 "
   )
+
   execute_process(
     COMMAND ${conan_command} config install ${setting_file}
   )
