@@ -5,7 +5,7 @@ include(fix_msvc)
 include(enable_cpp_module NO_POLICY_SCOPE)
 include(cpp_novice_fetch_project_options)
 
-project(cpp_novice LANGUAGES CXX)
+project(cpp_novice LANGUAGES C CXX)
 
 include(check_latest_cppstd)
 include(cpp_novice_custom_project_options)
