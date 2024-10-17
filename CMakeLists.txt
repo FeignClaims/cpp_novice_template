@@ -4,7 +4,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(fix_msvc)
 include(cpp_novice_fetch_project_options)
 
-project(cpp_novice LANGUAGES CXX)
+project(cpp_novice LANGUAGES C CXX)
 
 include(check_latest_cppstd)
 include(cpp_novice_custom_project_options)
