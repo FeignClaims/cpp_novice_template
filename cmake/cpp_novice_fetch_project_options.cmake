@@ -22,4 +22,4 @@ macro(fetch_project_options git_repository git_tag)
 endmacro()
 
 # Fetch from a mirror of https://github.com/aminya/project_options, since it is difficult to access github in China
-fetch_project_options(https://gitee.com/cpp_tutorial/project_options.git mirrored)
+fetch_project_options(https://gitlab.com/FeignClaims/project_options.git mirrored)
