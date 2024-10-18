@@ -28,7 +28,7 @@ endfunction()
 if(23 IN_LIST CMAKE_CXX_COMPILER_IMPORT_STD)
   # FIXME: homebrew clang can't find libc++.modules.json without some manual work,
   # see https://gitlab.kitware.com/cmake/cmake/-/issues/25965
-  if(APPLE AND("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang"))
+  if(APPLE AND(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang"))
     message(STATUS
       "Currently this template dosen't support `import std;` for homebrew clang, as it requires manual fix by novices themselves.\n"
       "  See https://gitlab.kitware.com/cmake/cmake/-/issues/25965 for the workaround.\n"
