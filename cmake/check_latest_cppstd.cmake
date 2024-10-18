@@ -32,7 +32,7 @@ endmacro()
 
 macro(_enable_libcxx_for_clang)
   if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-    set(CMAKE_CXX_FLAGS "-stdlib=libc++")
+    set(CMAKE_CXX_FLAGS "-stdlib=libc++ -fuse-ld=lld")
   endif()
 endmacro()
 
