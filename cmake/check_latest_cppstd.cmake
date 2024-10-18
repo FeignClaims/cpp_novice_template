@@ -31,8 +31,11 @@ macro(_add_cppstd_to_conan cppstd)
 endmacro()
 
 macro(_enable_libcxx_for_clang)
+  # Make clang installed by homebrew or linuxbrew use libc++ and be able to compile `std::println("Hello C++{}", 23);`
   if(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
-    set(CMAKE_CXX_FLAGS "-stdlib=libc++")
+    cmake_path(GET CMAKE_CXX_COMPILER PARENT_PATH compiler_bin_path)
+    cmake_path(GET compiler_bin_path PARENT_PATH compiler_root)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -L${compiler_root}/lib -Wl,-rpath,${compiler_root}/lib -Wno-unused-command-line-argument")
   endif()
 endmacro()
 
