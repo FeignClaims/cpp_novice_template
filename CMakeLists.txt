@@ -11,6 +11,7 @@ include(check_latest_cppstd)
 include(cpp_novice_custom_project_options)
 include(detect_std_module)
 include(add_program)
+include(qt)
 add_subdirectory(support)
 
 # -----------------------------------------------------------------------------------------------------------------------
@@ -23,6 +24,13 @@ add_program_options(
   INCLUDES
   include
 )
+
+# ------------------------------------------------------------------------------------------------------------------------
+if(Qt6_FOUND)
+  add_program(example_gui
+    src/example_gui/main.cpp
+  )
+endif()
 
 # ------------------------------------------------------------------------------------------------------------------------
 add_program(test

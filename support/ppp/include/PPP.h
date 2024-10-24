@@ -1,4 +1,5 @@
-// PPP.h
+#ifndef PPP_PPPHEADERS_H
+#define PPP_PPPHEADERS_H
 
 #ifndef PPP_SUPPORT_MODULE
 #  error The configuration dosen't support `#include "PPP.h"`. Please use `#include "PPPheaders.h"` instead or update the configuration according to README.pdf. \
@@ -10,3 +11,5 @@ import PPP;
 using namespace PPP;
 using namespace std;
 // NOLINTEND
+
+#endif
