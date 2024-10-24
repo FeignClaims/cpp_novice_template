@@ -23,14 +23,17 @@ add_program_options(
 )
 
 # ------------------------------------------------------------------------------------------------------------------------
+find_package(fltk CONFIG)
+
+if(fltk_FOUND)
+  add_program(example_gui
+    src/example_gui/main.cpp
+  )
+endif()
+
+# ------------------------------------------------------------------------------------------------------------------------
 add_program(test
   test/main.cpp
-)
-add_program(example_gui
-  src/example_gui/Graph.cpp
-  src/example_gui/Gui.cpp
-  src/example_gui/Main.cpp
-  src/example_gui/Window.cpp
 )
 add_program(example_single
   src/example_single/main.cpp
