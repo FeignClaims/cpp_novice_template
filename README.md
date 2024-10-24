@@ -69,6 +69,7 @@ Here I provide three ways to install Qt. After installation, You're able to use 
 
 1. Download Qt installer in [this link](https://www.qt.io/download-qt-installer-oss?utm_referrer=https%3A%2F%2Fwww.qt.io%2Fdownload-open-source).
 2. Double click the downloaded Qt installer to install it.
+3. Clear the CMake cache and reconfigure CMake in your IDE in some way (for example, you might delete the build or out folder and restart the software). Then you can use Qt in this project template.
 
 For more details, see [villevoutilainen/ProgrammingPrinciplesAndPracticeUsingQt](https://github.com/villevoutilainen/ProgrammingPrinciplesAndPracticeUsingQt).
 
