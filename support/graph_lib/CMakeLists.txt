@@ -1,5 +1,3 @@
-find_package(fltk CONFIG)
-
 if(fltk_FOUND)
   add_library(graph_lib)
   target_sources(graph_lib

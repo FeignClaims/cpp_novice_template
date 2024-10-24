@@ -9,6 +9,7 @@ project(cpp_novice LANGUAGES C CXX)
 include(check_latest_cppstd)
 include(cpp_novice_custom_project_options)
 include(add_program)
+include(fltk)
 add_subdirectory(support)
 
 # -----------------------------------------------------------------------------------------------------------------------
@@ -23,8 +24,6 @@ add_program_options(
 )
 
 # ------------------------------------------------------------------------------------------------------------------------
-find_package(fltk CONFIG)
-
 if(fltk_FOUND)
   add_program(example_gui
     src/example_gui/main.cpp

@@ -1,7 +1,5 @@
 add_library(wrapped_fltk INTERFACE)
 
-find_package(fltk CONFIG)
-
 if(fltk_FOUND)
   target_include_system_directories(wrapped_fltk
     INTERFACE
