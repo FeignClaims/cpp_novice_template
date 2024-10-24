@@ -50,6 +50,8 @@ As for header files (`.h`, `.hpp`, etc.), you can simply put them together with 
 
 If you want to make a header file includable globally, you can put it inside `include` folder. For example, in `src/example_single` folder, `main.cpp` can `#include "add.hpp"` which is put inside `include` folder.
 
+NOTE: In order to make Qt (in chapter 12-16) work correctly, you should also add header file paths in your `add_program` like source file paths.
+
 ## `#include "PPP.h"` issues error?
 
 Currently the module feature is not supported well. If your `#include "PPP.h"` issues error, you should use `#include "PPPheaders.h"` instead of `#include "PPP.h"`.
