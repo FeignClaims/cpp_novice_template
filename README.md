@@ -63,6 +63,24 @@ click [here](https://arewemodulesyet.org/tools/) to see current tools support fo
 - for MacOS homebrew clang users: There's a [bug](https://gitlab.kitware.com/cmake/cmake/-/issues/25965) for homebrew clang with CMake's standard module library support, which requires your manual fix. After fix, you should remove the if condition in the FIXME part of `cmake/detect_std_module.cmake` file to enable module support for this project template.
 - for clangd users (possibly using VSCode, Qt Creator, vim, etc.): Although clangd has [supported module](https://github.com/llvm/llvm-project/pull/66462) since 19, it hasn't supported it very well.
 
+## `QWidget: Must construct a QApplication before a QWidget`
+
+In chapter 12-16, we use Qt as the graph library (see how to install it below).
+
+However, the example code in the textbook fails and issues `QWidget: Must construct a QApplication before a QWidget`. Please check `src/example_gui/main.cpp` to learn how to fix it.
+
+In a nutshell, you should put these lines of code around the example code:
+
+```cpp
+int main() {
+  using namespace Graph_lib;
+
+  Application app;
+  /* example code */
+  app.gui_main();
+}
+```
+
 ## Install Qt
 
 Here I provide three ways to install Qt. After installation, You're able to use it in this project template directly.
