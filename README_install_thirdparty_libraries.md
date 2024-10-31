@@ -4,7 +4,7 @@
 
 The template provides two ways of third-party library installation. You can mix them to install libraries if you like.
 
-:warning: Please make sure the network is accessible to github.
+:warning: Please make sure the network, especially inside terminal, is accessible to github (for instance, in the "steam++ toolbox" app you can choose to speed up github access). If you're using a VPN, please enable "tun mode" or something alike.
 
 ## Use vcpkg
 
