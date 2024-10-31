@@ -1,7 +1,7 @@
 # CMake file overview
 
 - `add_program.cmake`: Wraps cmake to simplify the work of adding a new program.
-- `cpp_novice_fetch_project_options.cmake`: Fetches [aminya/project_options](https://github.com/aminya/project_options) from [the mirror repository](https://gitee.com/cpp_tutorial/project_options).
+- `cpp_novice_fetch_project_options.cmake`: Fetches [aminya/project_options](https://github.com/aminya/project_options) from [the mirror repository](https://gitlab.com/FeignClaims/project_options).
 - `cpp_novice_custom_project_options.cmake`: Customizes and runs `dynamic_project_options(...)` in [aminya/project_options](https://github.com/aminya/project_options).
 - `detect_std_module.cmake`: Detects whether the ``import std;`` feature since C++23 is usable in the current toolchain and enables it if possible.
 - `enable_cpp_module.cmake`: Enables the experimental C++ module feature since C++20.
