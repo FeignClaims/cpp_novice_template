@@ -56,6 +56,8 @@ Here I provide two ways to install fltk.
 
 ### Use vcpkg
 
+:warning: Please make sure the network, especially inside terminal, is accessible to github (for instance, in the "steam++ toolbox" app you can choose to speed up github access). If you're using a VPN, please enable "tun mode" or something alike.
+
 Edit `CMakeLists.txt`, add a line `run_vcpkg()` between `include(fetch_project_options)` and `project(cpp_starter LANGUAGES CXX)`. That is:
 
 ```cmake
@@ -72,6 +74,8 @@ project(cpp_starter LANGUAGES CXX)
 Clear the CMake cache and reconfigure CMake in your IDE in some way (for example, you might delete the build or out folder and restart the software). Then if you're lucky, the installation should have happened automatically.
 
 ### Use conan
+
+:warning: Please make sure the network, especially inside terminal, is accessible to github (for instance, in the "steam++ toolbox" app you can choose to speed up github access). If you're using a VPN, please enable "tun mode" or something alike.
 
 1. Install conan 2 somehow. For example, you can download it from [the official website](https://conan.io/downloads).
 2. [Similarly](#use-vcpkg), add `run_conan()` between `include(fetch_project_options)` and `project(cpp_starter LANGUAGES CXX)`.
