@@ -6,6 +6,7 @@ Checks: >
   -*objc*,
   -abseil*,
   -altera*,
+  -boost-use-ranges,
   -bugprone-easily-swappable-parameters,
   -bugprone-narrowing-conversions,
   -cert-dcl21-cpp,
@@ -21,6 +22,7 @@ Checks: >
   -misc-non-private-member-variables-in-classes,
   -misc-use-internal-linkage,
   -modernize-pass-by-value,
+  -modernize-use-designated-initializers,
   -modernize-use-trailing-return-type,
   -performance-enum-size,
   -performance-unnecessary-value-param,
@@ -28,6 +30,7 @@ Checks: >
   -readability-static-accessed-through-instance,
   -zircon*,
 CheckOptions:
+  modernize-use-ranges.UseReversePip: true
   readability-identifier-length.IgnoredVariableNames: n|ch|_|id|to|t|u|i|j|k|op
   readability-identifier-length.IgnoredParameterNames: n|ch|_|id|to|t|u|i|j|k|op
   # Uncomment the below options to force Stroustrup style naming: See https://clang.llvm.org/extra/clang-tidy/checks/readability/identifier-naming.html
