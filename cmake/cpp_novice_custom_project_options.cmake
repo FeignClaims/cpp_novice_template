@@ -52,6 +52,7 @@ dynamic_project_options(
   -Wall
   -Wextra # reasonable and standard
   -Wextra-semi # warn about semicolon after in-class function definition
+  -Warray-compare # warn about array comparison on versions older than C++20
   -Wcast-align # warn for potential performance problem casts
   -Wdouble-promotion # warn if float is implicit promoted to double
   -Wformat=2 # warn on security issues around functions that format output (ie printf)
