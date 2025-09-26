@@ -18,7 +18,10 @@ BreakAdjacentStringLiterals: true
 BreakAfterAttributes: Leave
 BreakBeforeBinaryOperators: All
 BreakBeforeInlineASMColon: OnlyMultiline
+BreakBeforeTemplateCloser: true
+BreakTemplateDeclarations: Yes
 BinPackArguments: false
+BinPackLongBracedList: true
 BinPackParameters: false
 ColumnLimit: 120
 DerivePointerAlignment: false
@@ -36,6 +39,7 @@ IncludeCategories:
     Priority: 3
 IncludeIsMainRegex: "([-_.](test|unittest|pass|fail))?$"
 IncludeIsMainSourceRegex: ""
+IndentExportBlock: false
 InsertBraces: true
 IntegerLiteralSeparator:
   Binary: 4
@@ -44,10 +48,13 @@ IntegerLiteralSeparator:
 IndentRequiresClause: true
 IndentPPDirectives: AfterHash
 InsertNewlineAtEOF: false
+KeepEmptyLines:
+  AtEndOfFile: false
+  AtStartOfBlock: false
+  AtStartOfFile: false
 LineEnding: LF
 NamespaceIndentation: Inner
 PackConstructorInitializers: NextLine
-RequiresClausePosition: OwnLine
 PointerAlignment: Left
 QualifierAlignment: Custom
 QualifierOrder:
@@ -63,7 +70,9 @@ QualifierOrder:
   ]
 ReferenceAlignment: Pointer
 ReflowComments: false
+RemoveEmptyLinesInUnwrappedLines: true
 # RemoveParentheses: MultipleParentheses  # Too many false positive
+RequiresClausePosition: OwnLine
 RemoveSemicolon: true
 RequiresExpressionIndentation: Keyword
 ShortNamespaceLines: 0

@@ -23,6 +23,7 @@ Checks: >
   -misc-use-internal-linkage,
   -modernize-pass-by-value,
   -modernize-use-designated-initializers,
+  -modernize-use-integer-sign-comparison,
   -modernize-use-trailing-return-type,
   -performance-enum-size,
   -performance-unnecessary-value-param,
