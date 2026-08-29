@@ -12,6 +12,8 @@ Diagnostics:
   Includes:
     AnalyzeAngledIncludes: Yes # Enables detection of unused angled includes that are not from the standard library
   # MissingIncludes: Strict # Uncomment it if required; might be too annoying
+Documentation:
+  CommentFormat: Doxygen
 Index:
   Background: Build
   StandardLibrary: Yes
