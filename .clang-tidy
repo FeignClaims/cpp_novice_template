@@ -12,12 +12,14 @@ Checks: >
   -cert-dcl21-cpp,
   -cert-err58-cpp,
   -cppcoreguidelines-narrowing-conversions,
+  -cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,
   -cppcoreguidelines-pro-bounds-constant-array-index,
   -fuchsia*,
   -google-build-using-namespace,
   -google-readability-todo,
   -llvm-include-order,
   -llvm-qualified-auto,
+  -llvm-use-ranges,
   -llvmlib*,
   -misc-non-private-member-variables-in-classes,
   -misc-use-internal-linkage,
@@ -30,6 +32,7 @@ Checks: >
   -readability-qualified-auto,
   -readability-static-accessed-through-instance,
   -zircon*,
+  -fuchsia*,
 CheckOptions:
   modernize-use-ranges.UseReversePip: true
   readability-identifier-length.IgnoredVariableNames: n|ch|_|id|to|t|u|i|j|k|op

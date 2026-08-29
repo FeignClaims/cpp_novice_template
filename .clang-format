@@ -6,6 +6,7 @@ AllowBreakBeforeNoexceptSpecifier: Always
 AllowShortCompoundRequirementOnASingleLine: true
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortLambdasOnASingleLine: Inline
+AllowShortRecordOnASingleLine: EmptyAndAttached
 AlignConsecutiveAssignments:
   Enabled: true
   AlignCompound: true
@@ -18,11 +19,11 @@ BreakAdjacentStringLiterals: true
 BreakAfterAttributes: Leave
 BreakBeforeBinaryOperators: All
 BreakBeforeInlineASMColon: OnlyMultiline
+BreakBinaryOperations:
+  Default: OnePerLine
 BreakBeforeTemplateCloser: true
 BreakTemplateDeclarations: Yes
-BinPackArguments: false
 BinPackLongBracedList: true
-BinPackParameters: false
 ColumnLimit: 120
 DerivePointerAlignment: false
 EmptyLineBeforeAccessModifier: Always
@@ -54,7 +55,16 @@ KeepEmptyLines:
   AtStartOfFile: false
 LineEnding: LF
 NamespaceIndentation: Inner
+NumericLiteralCase:
+  ExponentLetter: Lower
+  HexDigit: Upper
+  Prefix: Lower
+  Suffix: Upper
+PackArguments:
+  BinPack: OnePerLine
 PackConstructorInitializers: NextLine
+PackParameters:
+  BinPack: OnePerLine
 PointerAlignment: Left
 QualifierAlignment: Custom
 QualifierOrder:
@@ -72,10 +82,12 @@ ReferenceAlignment: Pointer
 ReflowComments: false
 RemoveEmptyLinesInUnwrappedLines: true
 # RemoveParentheses: MultipleParentheses  # Too many false positive
-RequiresClausePosition: OwnLine
 RemoveSemicolon: true
+RequiresClausePosition: OwnLine
 RequiresExpressionIndentation: Keyword
 ShortNamespaceLines: 0
+SpaceBeforeEnumUnderlyingTypeColon: true
+SpaceInEmptyBraces: Never
 StatementMacros:
   - BOOST_HOF_RETURNS
 ---
