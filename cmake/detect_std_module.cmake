@@ -1,8 +1,8 @@
 # - Detects and enables `import std;`
-# This module detects whether the ``import std;`` feature since C++23 is usable in the current toolchain and enables it 
+# This module detects whether the ``import std;`` feature since C++23 is usable in the current toolchain and enables it
 # if possible.
 #
-# Note that this module should be included after `project(...)`. 
+# Note that this module should be included after `project(...)`.
 include_guard()
 
 function(_reset_std_module_properties)
@@ -38,7 +38,7 @@ if(23 IN_LIST CMAKE_CXX_COMPILER_IMPORT_STD)
   endif()
 
   # Enable importing std module
-  set(CMAKE_CXX_MODULE_STD ON)
+  set(CMAKE_CXX_MODULE_STD ON CACHE BOOL "" FORCE)
 
   # Required because std module's properties are set before `project(...)`,
   # thus before `cpp_novice_fetch_project_options.cmake`
