@@ -20,7 +20,7 @@ if(EXISTS "${_tmp}")
     "please delete this file manually."
   )
 else()
-  set(_url "https://raw.githubusercontent.com/Kitware/CMake/v${CMAKE_VERSION}/Source/cmExperimental.cxx")
+  set(_url "https://gh-proxy.org/https://raw.githubusercontent.com/Kitware/CMake/v${CMAKE_VERSION}/Source/cmExperimental.cxx")
   message(STATUS "Downloading cmExperimental.cxx from: ${_url}")
   file(DOWNLOAD "${_url}" "${_tmp}" STATUS _dl_status SHOW_PROGRESS TIMEOUT 15)
 
