@@ -56,12 +56,7 @@ NOTE: In order to make Qt (in chapter 12-16) work correctly, you should also add
 
 Currently the module feature is not supported well. If your `#include "PPP.h"` issues error, you should use `#include "PPPheaders.h"` instead of `#include "PPP.h"`.
 
-**TLDR:** If you're using clang 18+ as the compiler or the latest version of Visual Studio 2022 as the IDE, you might be lucky enough to successfully #include "PPP.h". But for now, you'll usually fail, and continuing to tinker with it will leave you physically and mentally exhausted.
-
 click [here](https://arewemodulesyet.org/tools/) to see current tools support for module. What's more,
-
-- for MacOS homebrew clang users: There's a [bug](https://gitlab.kitware.com/cmake/cmake/-/issues/25965) for homebrew clang with CMake's standard module library support, which requires your manual fix. After fix, you should remove the if condition in the FIXME part of `cmake/detect_std_module.cmake` file to enable module support for this project template.
-- for clangd users (possibly using VSCode, Qt Creator, vim, etc.): Although clangd has [supported module](https://github.com/llvm/llvm-project/pull/66462) since 19, it hasn't supported it very well.
 
 ## `QWidget: Must construct a QApplication before a QWidget`
 

@@ -26,15 +26,41 @@ function(_reset_std_module_properties)
 endfunction()
 
 if(23 IN_LIST CMAKE_CXX_COMPILER_IMPORT_STD)
-  # FIXME: homebrew clang can't find libc++.modules.json without some manual work,
-  # see https://gitlab.kitware.com/cmake/cmake/-/issues/25965
-  if(APPLE AND(CMAKE_CXX_COMPILER_ID MATCHES ".*Clang"))
-    message(STATUS
-      "Currently this template dosen't support `import std;` for homebrew clang, as it requires manual fix by novices themselves.\n"
-      "  See https://gitlab.kitware.com/cmake/cmake/-/issues/25965 for the workaround.\n"
-      "(当前本模板不支持为 homebrew 安装的 clang 提供 `import std;` 支持, 因为它需要初学者自己进行手动修复.)\n"
-      "  (请参见 https://gitlab.kitware.com/cmake/cmake/-/issues/25965 获取解决方法.)")
-    return()
+  if(APPLE)
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
+      message(STATUS
+        "AppleClang does not currently support `import std;`. Please use Homebrew Clang instead.\n"
+        "(AppleClang 目前不支持 `import std;`，请使用 Homebrew 安装的 Clang。)")
+      return()
+    endif()
+
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+      if(CMAKE_VERSION VERSION_LESS "4.2")
+        message(STATUS
+          "This template requires CMake 4.2 or newer to enable `import std;` with Homebrew Clang.\n"
+          "  Current CMake version: ${CMAKE_VERSION}. Please upgrade CMake.\n"
+          "(本模板使用 Homebrew Clang 启用 `import std;` 需要 CMake 4.2 或更高版本。\n"
+          "  当前 CMake 版本为 ${CMAKE_VERSION}，请升级 CMake。)")
+        return()
+      endif()
+
+      # Homebrew's Clang may return only "libc++.modules.json" from
+      # -print-file-name, even though the metadata is installed in lib/c++.
+      # CMake 4.2+ lets us correct that path before generating the std targets.
+      if(23 IN_LIST CMAKE_CXX_COMPILER_IMPORT_STD
+        AND CMAKE_CXX_STDLIB_MODULES_JSON STREQUAL "libc++.modules.json")
+        # Resolve symlinks so this also works with Homebrew's bin/clang++ link.
+        file(REAL_PATH "${CMAKE_CXX_COMPILER}" _clang_real_path)
+        cmake_path(GET _clang_real_path PARENT_PATH _clang_bin_dir)
+        cmake_path(GET _clang_bin_dir PARENT_PATH _clang_prefix)
+        set(_libcxx_modules_json "${_clang_prefix}/lib/c++/libc++.modules.json")
+
+        if(EXISTS "${_libcxx_modules_json}")
+          set(CMAKE_CXX_STDLIB_MODULES_JSON "${_libcxx_modules_json}")
+          message(STATUS "Using libc++ module metadata: ${CMAKE_CXX_STDLIB_MODULES_JSON}")
+        endif()
+      endif()
+    endif()
   endif()
 
   # Enable importing std module
